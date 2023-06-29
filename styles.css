@@ -21,6 +21,7 @@ html, body {
     background-color: black;
     /* border: 1px solid black; */
     flex-wrap: wrap;
+    padding-bottom: 80px;
 }
 
 .display-container {
@@ -48,10 +49,10 @@ button {
     height: 90px;
 }
 
-.number {
+.operand {
     background-color: darkgrey;
 }
 
-.operator {
+.operator, .equals, .decimal {
     background-color: #333333;
 }
