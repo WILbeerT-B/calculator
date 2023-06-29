@@ -1,6 +1,10 @@
-const displayContainer = document.querySelector('.display-container');
-const d1 = document.createElement('p');
-const d2 = document.createElement('p');
+let displayValue = '0',
+    firstOperand = null,
+    secondOperand = null,
+    firstOperator = null,
+    secondOperator = null,
+    result = null;
+const buttons = document.querySelectorAll('button');
 
 function add(a, b) {
     return a + b;
@@ -18,10 +22,6 @@ function multiply(a, b) {
     return a * b;
 }
 
-let num1 = "", 
-    num2 = "",
-    operator = "";
-
 function operate(operator, num1, num2) {
     if (operator === "+") {
         return add(Number(num1), Number(num2));
@@ -33,39 +33,80 @@ function operate(operator, num1, num2) {
         return multiply(num1, num2);
     }
 }
-function populateDisplay() {
-    const buttons = document.querySelectorAll('button');
-    let input = "";
-    let len = 0;
-    buttons.forEach((button) => {
-        button.addEventListener('click', event => {
-            input += button.id;
-            d1.textContent = input;
-            if(button.id == "+" || button.id == "-" 
-                || button.id == "/" || button.id == "*") {
-                for (let i=0; i<input.length-1; i++) {
-                    // console.log(getInputValue(num1.charAt(i)));
-                    num1 += getInputValue(input.charAt(i));
-                    console.log(num1);
-                }
-                len = input.length;
-                operator = getInputValue(input.substring(len-1, len));
-                console.log(operator);
-                // console.log(len);
-            }
-            if(button.id == "=") {
-                for (let i=len; i<input.length-1; i++) {
-                    num2 += getInputValue(input.charAt(i));
-                    console.log(num2); 
-                }
-                console.log(operate(operator, num1, num2));
-            }
-        });
-        displayContainer.appendChild(d1);
-    });
-}
-function getInputValue(num) {
-    return num;
+
+
+function updateDisplay() {
+    const displayContainer = document.querySelector('.display-container');
+    displayContainer.textContent = displayValue;
 }
 
-populateDisplay();
+updateDisplay();
+
+function clickButton() {
+    for(let i=0; i<buttons.length; i++) {
+        buttons[i].addEventListener('click', function() {
+            if(buttons[i].classList.contains('operand')) {
+                console.log(buttons[i].value);
+                inputOperand(buttons[i].value);
+                updateDisplay();
+            } else if(buttons[i].classList.contains('operator')) {
+                console.log(buttons[i].value);
+                inputOperator(buttons[i].value);
+                updateDisplay();
+            } else if(buttons[i].classList.contains('equals')) {
+                inputEquals();
+                updateDisplay();
+            }
+        })
+    }
+}
+clickButton()
+
+function inputOperand(operand) {
+//     if(displayValue === '0' || displayValue === 0) {
+//         displayValue = operand;
+//     } else {
+//         displayValue += operand;
+//     }
+//     if(displayValue === firstOperand) {
+//         displayValue = operand;
+//     } else {
+//         displayValue += operand;
+//     }
+// }
+    if(firstOperator === null) {
+        if(displayValue === '0' || displayValue === 0) {
+            displayValue = operand;
+        } else if(displayValue === firstOperand) {
+            displayValue = operand;
+        } else {
+            displayValue += operand;
+        }
+    } else {
+        if(displayValue === firstOperand) {
+            displayValue = operand;
+        } else {
+            displayValue += operand;
+        }
+
+    }
+
+}
+
+function inputOperator(operator) {
+    firstOperator = operator;
+    firstOperand = displayValue;
+    console.log(firstOperand, firstOperator);
+    
+}
+
+function inputEquals() {
+    secondOperand = displayValue;
+    result = operate(firstOperator, firstOperand, secondOperand);
+    displayValue = result;
+    
+    console.log(secondOperand, result);
+}
+
+
+
