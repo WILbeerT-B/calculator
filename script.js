@@ -1,8 +1,7 @@
 let displayValue = '0',
     firstOperand = null,
     secondOperand = null,
-    firstOperator = null,
-    secondOperator = null,
+    operator = null,
     result = null;
 const buttons = document.querySelectorAll('button');
 
@@ -22,39 +21,38 @@ function multiply(a, b) {
     return a * b;
 }
 
-function operate(operator, num1, num2) {
-    if (operator === "+") {
+function operate(op, num1, num2) {
+    if (op === "+") {
         return add(Number(num1), Number(num2));
-    } else if (operator === "-") {
+    } else if (op === "-") {
         return subtract(num1, num2);
-    } else if (operator === "/") {
+    } else if (op === "/") {
         return divide(num1, num2);
-    } else if (operator === "*") {
+    } else if (op === "*") {
         return multiply(num1, num2);
     }
 }
 
-
 function updateDisplay() {
-    const displayContainer = document.querySelector('.display-container');
-    displayContainer.textContent = displayValue;
+    const displayContainer2 = document.querySelector('.display-container2');
+    displayContainer2.textContent = displayValue;
 }
-
 updateDisplay();
 
 function clickButton() {
     for(let i=0; i<buttons.length; i++) {
         buttons[i].addEventListener('click', function() {
             if(buttons[i].classList.contains('operand')) {
-                console.log(buttons[i].value);
                 inputOperand(buttons[i].value);
                 updateDisplay();
             } else if(buttons[i].classList.contains('operator')) {
-                console.log(buttons[i].value);
                 inputOperator(buttons[i].value);
                 updateDisplay();
             } else if(buttons[i].classList.contains('equals')) {
                 inputEquals();
+                updateDisplay();
+            } else if(buttons[i].classList.contains('clear')) {
+                clearDisplay();
                 updateDisplay();
             }
         })
@@ -63,50 +61,57 @@ function clickButton() {
 clickButton()
 
 function inputOperand(operand) {
-//     if(displayValue === '0' || displayValue === 0) {
-//         displayValue = operand;
-//     } else {
-//         displayValue += operand;
-//     }
-//     if(displayValue === firstOperand) {
-//         displayValue = operand;
-//     } else {
-//         displayValue += operand;
-//     }
-// }
-    if(firstOperator === null) {
+    if(firstOperand === null) {
         if(displayValue === '0' || displayValue === 0) {
             displayValue = operand;
         } else if(displayValue === firstOperand) {
             displayValue = operand;
+        } else if(displayValue === result) {
+            displayValue = operand; 
         } else {
             displayValue += operand;
         }
     } else {
-        if(displayValue === firstOperand) {
+        if(displayValue === '0' || displayValue === 0) {
+            displayValue = operand;
+        } else if(displayValue === firstOperand) {
+            displayValue = operand;
+        } else if(displayValue === result) {
             displayValue = operand;
         } else {
             displayValue += operand;
         }
-
     }
-
 }
 
-function inputOperator(operator) {
-    firstOperator = operator;
-    firstOperand = displayValue;
-    console.log(firstOperand, firstOperator);
-    
+function inputOperator(op) {
+    if(firstOperand === null) {
+        firstOperand = displayValue;
+        operator = op;
+    } else {
+        secondOperand = displayValue;
+        result = operate(operator, firstOperand, secondOperand);
+        displayValue = result;
+        operator = op;
+        firstOperand = result;
+    }
 }
 
 function inputEquals() {
-    secondOperand = displayValue;
-    result = operate(firstOperator, firstOperand, secondOperand);
-    displayValue = result;
-    
-    console.log(secondOperand, result);
+    if(operator !== null) {
+        secondOperand = displayValue;
+        result = operate(operator, firstOperand, secondOperand);
+        displayValue = result;
+        firstOperand = null;
+    } else {
+        displayValue = '0';
+    }
 }
 
-
-
+function clearDisplay() {
+    displayValue = '0';
+    firstOperand = null;
+    secondOperand = null;
+    operator = null;
+}
+clearDisplay();

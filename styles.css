@@ -1,13 +1,11 @@
 html, body {
     height: 100%;
-    /* box-sizing: border-box; */
-    /* background-color: grey; */
-    /* border: 1px solid red; */
+    background-color: grey;
 }
 
 .flex-container {
     display: flex;
-    /* background-color:; */
+    margin-top: 0;
     justify-content: center;
     align-items: center;
     height: 100%;
@@ -17,42 +15,56 @@ html, body {
     display: flex;
     height: 360px;
     width: 280px;
-    
     background-color: black;
-    /* border: 1px solid black; */
     flex-wrap: wrap;
-    padding-bottom: 80px;
+    padding-bottom: 120px;
 }
 
-.display-container {
-    color: blue;
-    background-color: grey;
+.display-container1 {
+    color: #008F11;
+    background-color: #0D0208;
     width: 280px;
-    height: 80px;
+    height: 40px;
+    font-size: 24px;
+}
+
+.display-container2 {
+    color: #008F11;
+    background-color: #0D0208;
+    width: 280px;
+    height: 40px;
+    font-size: 36px;
+    text-align: right;
+    padding-right: 8px;
 }
 
 .empty {
-    border: 1px solid black;
-    width: 207px;
+    border: .1px solid black;
+    width: 209px;
     height: 40px;
 }
 
 .clear {
     flex: 1;
-    height: 40px;
-    width: 70px;
+    height: 41px;
+    width: 65px;
+    border: none;
+    font-size: larger;
 }
 
 button {
     /* flex: 1; */
+    border: .3px solid black;
     width: 70px;
     height: 90px;
+    font-size: x-large;
 }
 
 .operand {
     background-color: darkgrey;
 }
 
-.operator, .equals, .decimal {
+.operator, .equals, .decimal, .clear {
     background-color: #333333;
+    color: white;
 }
