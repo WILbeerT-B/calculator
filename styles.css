@@ -1,6 +1,6 @@
 html, body {
     height: 100%;
-    background-color: grey;
+    background-color: white;
 }
 
 .flex-container {
@@ -20,22 +20,27 @@ html, body {
     padding-bottom: 120px;
 }
 
-.display-container1 {
-    color: #008F11;
+#display-container1 {
+    /* color: #008F11; */
+    color: red;
     background-color: #0D0208;
     width: 280px;
     height: 40px;
-    font-size: 24px;
-}
-
-.display-container2 {
-    color: #008F11;
-    background-color: #0D0208;
-    width: 280px;
-    height: 40px;
-    font-size: 36px;
+    font-size: 18px;
     text-align: right;
     padding-right: 8px;
+    font-style: italic;
+}
+
+#display-container {
+    color: #008F11;
+    background-color: #0D0208;
+    width: 280px;
+    height: 40px;
+    font-size: 56px;
+    text-align: right;
+    padding-right: 8px;
+    padding-bottom: 14px;
 }
 
 .empty {
