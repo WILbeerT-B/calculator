@@ -73,3 +73,19 @@ button {
     background-color: #333333;
     color: white;
 }
+
+.footer-container {
+    text-align: center;
+    margin-top: 24px;
+    border-top: 1px solid black;
+    padding: 16px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12px;
+}
+
+.footer-container > a {
+    color: black;
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+}
